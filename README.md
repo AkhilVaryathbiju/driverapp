@@ -1,16 +1,24 @@
-# driverapp
+# DriverApp
 
-A new Flutter project.
+## Project Assignment
+This is a Flutter app for delivery drivers to manage assigned orders, navigate to pickup and delivery locations, and track progress with geofence checks. Optional features include order history and notification simulation.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Dependencies
+- geolocator
+- url_launcher
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Login Credentials
+- Username: `user`
+- Password: `1234`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## Setup Instructions
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/AkhilVaryathbiju/driverapp.git
+   

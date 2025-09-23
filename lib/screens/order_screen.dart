@@ -3,8 +3,8 @@
 
 import 'dart:async';
 
-import 'package:driver_app/models/order.dart';
-import 'package:driver_app/services/location_services.dart';
+
+import 'package:driverapp/models/order.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';

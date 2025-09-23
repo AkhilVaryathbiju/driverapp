@@ -1,5 +1,6 @@
-import 'package:driver_app/screens/order_screen.dart';
-import 'package:driver_app/screens/widgets/textfeild_custom.dart';
+
+import 'package:driverapp/screens/order_screen.dart';
+import 'package:driverapp/widgets/custom_textfeild.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {

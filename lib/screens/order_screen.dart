@@ -6,6 +6,7 @@ import 'dart:async';
 
 import 'package:driverapp/models/order.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -23,6 +24,21 @@ Position?driverPosition;
 double distanceToRestaurant=0;
 double distanceToCustomer=0;
 Timer? _timer;
+String restaurantAddress = '';
+String customerAddress = '';
+orderStatus status=orderStatus.notStarted;
+
+
+  final order = Order(id: 211, 
+  restaurantNAme: 'Chinese Restaurant',
+   restaurantLat: 10.0280,
+    customerLng: 76.2999,
+     amount: 150,
+      customerLat: 9.9816, 
+      customerName: 'sam',
+       restaurantLng:76.2755
+       );
+
 
 @override
   void initState() {
@@ -33,7 +49,7 @@ _updateLocation();
 _timer=Timer.periodic(Duration(seconds: 1), (timer){
   _updateLocation();
 });
-
+getAdress();
 // driverPosition =Position(longitude: order.customerLat,
 //  latitude: order.customerLng,
 //   timestamp: DateTime.now(),
@@ -51,6 +67,22 @@ _timer=Timer.periodic(Duration(seconds: 1), (timer){
 
 
   }
+
+
+Future<void> getAdress()async{
+  List<Placemark> restaurantPlace= await placemarkFromCoordinates(order.restaurantLat,
+   order.restaurantLng);
+
+   List<Placemark> customerPlace= await placemarkFromCoordinates(order.customerLat,
+    order.customerLng);
+    setState(() {
+      restaurantAddress=': ${restaurantPlace.first.locality},${restaurantPlace.first.subLocality},${restaurantPlace.first.administrativeArea}';
+      customerAddress=':${customerPlace.first.locality},${customerPlace.first.subLocality},${customerPlace.first.administrativeArea}';
+    });
+}
+
+
+
   void _updateLocation()async{
     Position position= await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high
@@ -77,18 +109,6 @@ void dispose(){
     fontSize: 15
   );
 
-orderStatus status=orderStatus.notStarted;
-
-
-  final order = Order(id: 211, 
-  restaurantNAme: 'Chinese Restaurant',
-   restaurantLat: 23.2599,
-    customerLng: 77.4180,
-     amount: 150,
-      customerLat: 23.2621, 
-      customerName: 'sam',
-       restaurantLng: 77.4126
-       );
 
 
 
@@ -113,7 +133,7 @@ orderStatus status=orderStatus.notStarted;
              child: Padding(
                padding: const EdgeInsets.all(8.0),
                child: Container(
-                height: 257,
+                height: 297,
                 width: 300,
                 child: Center(
                   child: Column(mainAxisAlignment: MainAxisAlignment.start,
@@ -145,7 +165,7 @@ orderStatus status=orderStatus.notStarted;
                     child: Row(
                       children: [
                         Icon(Icons.location_on_rounded),
-                        Text(' : ${order.restaurantLat}:${order.restaurantLng}',style: styles)
+                        Text(restaurantAddress.isEmpty?': fetching...' : '${restaurantAddress}',style: styles)
                       ],
                     ),
                   ),
@@ -165,10 +185,19 @@ orderStatus status=orderStatus.notStarted;
                     child: Row(
                       children: [
                        Icon(Icons.person_pin_circle_rounded),
-                        Text(' : ${order.customerLat}:${order.customerLng}',style: styles)
+                        Text(customerAddress.isEmpty?': Fetching...':customerAddress,style: styles)
                       ],
                     ),
                   ),
+                     Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: Row(
+                           children: [
+                             Icon(Icons.attach_money_outlined),
+                             Text(' : ${order.amount}',style: styles,)
+                           ],
+                         ),
+                       ),
                     ],
                   ),
                 ),

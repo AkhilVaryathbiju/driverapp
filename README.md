@@ -1,8 +1,7 @@
 # DriverApp
 
 ## Project Assignment
-This is a Flutter app for delivery drivers to manage assigned orders, navigate to pickup and delivery locations, and track progress with geofence checks. Optional features include order history and notification simulation.
-
+This is a Flutter app for delivery drivers to manage assigned orders, navigate to pickup and delivery locations, and track progress with geofence checks.
 ---
 
 ## Dependencies
